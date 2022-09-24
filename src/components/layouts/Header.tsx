@@ -39,7 +39,7 @@ export const Header: FC<Props> = (props) => {
             />
           )}
           <Link to='/'>
-            <Text className={styles.title}>vite-mantine-template</Text>
+            <Text className={styles.title}>ぴえん文字</Text>
           </Link>
           <Group position='right' spacing='xs'>
             {!isMobileUi && (
