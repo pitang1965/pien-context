@@ -1,3 +1,4 @@
+import React from 'react';
 import { Center, Footer as MantineFooter, Text } from '@mantine/core';
 
 export const Footer = () => {

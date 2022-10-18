@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import React, { FC } from 'react';
 import { NavLink } from 'react-router-dom';
 import styles from './Navbar.module.css';
 import { Burger, Navbar as MantineNavbar } from '@mantine/core';

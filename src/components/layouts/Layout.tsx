@@ -1,4 +1,4 @@
-import { FC, ReactNode, useEffect, useState } from 'react';
+import React, { FC, ReactNode, useEffect, useState } from 'react';
 import { useAtom } from 'jotai';
 import { isMobileUiAtom } from '../../atoms/uiMode';
 import { AppShell } from '@mantine/core';
