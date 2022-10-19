@@ -9,6 +9,7 @@ module.exports = {
     'plugin:react/recommended',
     'plugin:react-hooks/recommended',
     'plugin:@typescript-eslint/recommended',
+    'prettier',
   ],
   overrides: [],
   parser: '@typescript-eslint/parser',
@@ -17,8 +18,5 @@ module.exports = {
     sourceType: 'module',
   },
   plugins: ['react', '@typescript-eslint'],
-  rules: {
-    semi: ['error', 'always'],
-    quotes: ['error', 'single'],
-  },
+  rules: {},
 };
