@@ -1,9 +1,9 @@
 .navbar {
-  font-family: "Avenir Next";
+  font-family: 'Avenir Next';
   font-weight: 700;
   font-size: 18px;
   line-height: 38.25px;
-  background-color: #6D41A1;
+  background-color: #6d41a1;
 
   /* ウィンドウ全体にメニューを広げる */
   position: fixed;
@@ -14,7 +14,7 @@
 
 .navbar * {
   color: white;
-  background-color: #6D41A1;
+  background-color: #6d41a1;
 }
 
 .burger {
