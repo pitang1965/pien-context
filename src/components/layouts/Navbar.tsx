@@ -34,14 +34,6 @@ export const Navbar: FC<Props> = (props) => {
           mr='xl'
           className={styles.burger}
         />
-        <MantineNavbar.Section mt='md'>
-          <NavLink
-            to='/'
-            style={({ isActive }) => (isActive ? activeStyle : inactiveStyle)}
-          >
-            Home
-          </NavLink>
-        </MantineNavbar.Section>
         <MantineNavbar.Section>
           <NavLink
             to='/about'
