@@ -7,13 +7,11 @@ import {
   Container,
   Group,
   Header as MantineHeader,
-  useMantineColorScheme,
+  MediaQuery,
   Text,
+  useMantineColorScheme,
 } from '@mantine/core';
 import { IconSun, IconMoonStars } from '@tabler/icons';
-
-import { useAtom } from 'jotai';
-import { isMobileUiAtom } from '../../atoms/uiMode';
 
 type Props = {
   opened: boolean;
@@ -21,7 +19,6 @@ type Props = {
 };
 
 export const Header: FC<Props> = (props) => {
-  const [isMobileUi] = useAtom(isMobileUiAtom);
   const { colorScheme, toggleColorScheme } = useMantineColorScheme();
   const dark = colorScheme === 'dark';
 
@@ -29,7 +26,7 @@ export const Header: FC<Props> = (props) => {
     <MantineHeader height={70} p='md'>
       <Container>
         <Group position='apart'>
-          {isMobileUi && (
+          <MediaQuery largerThan='sm' styles={{ display: 'none' }}>
             <Burger
               opened={props.opened}
               onClick={() => props.toggleOpenState()}
@@ -37,17 +34,17 @@ export const Header: FC<Props> = (props) => {
               title='バーガーメニュー'
               mr='xl'
             />
-          )}
+          </MediaQuery>
           <Link to='/'>
             <Text className={styles.title}>ぴえん文字</Text>
           </Link>
           <Group position='right' spacing='xs'>
-            {!isMobileUi && (
-              <div className={styles.menu}>
+            <MediaQuery smallerThan='sm' styles={{ display: 'none' }}>
+              <Group className={styles.menu}>
                 <Link to='/'>Home</Link>
                 <Link to='/about'>About</Link>
-              </div>
-            )}
+              </Group>
+            </MediaQuery>
             <ActionIcon
               variant='outline'
               sx={{ borderColor: '#C1C2C5' }}
