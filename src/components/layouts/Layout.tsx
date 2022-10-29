@@ -9,7 +9,7 @@ type Props = {
   content: string;
 };
 
-export const Layout: FC<Props> = (prpps) => {
+export const Layout: FC<Props> = (props) => {
   const [opened, setOpened] = useState<boolean>(false);
 
   function toggleOpenState(): void {
@@ -24,7 +24,7 @@ export const Layout: FC<Props> = (prpps) => {
       navbarOffsetBreakpoint='sm'
       navbar={<Navbar opened={opened} toggleOpenState={toggleOpenState} />}
     >
-      {prpps.children}
+      {props.children}
     </AppShell>
   );
 };
