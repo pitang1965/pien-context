@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Slider, Space, Stack } from '@mantine/core';
+import { Slider, Stack } from '@mantine/core';
 import { ConfigContext } from '@main/App';
 
 export const Config = () => {
@@ -8,7 +8,7 @@ export const Config = () => {
   console.log('Config rendered!');
 
   return (
-    <Stack>
+    <Stack spacing='xl'>
       <Slider
         min={96}
         max={512}
@@ -23,7 +23,6 @@ export const Config = () => {
         value={faceSize}
         onChange={setFaceSize}
       />
-      <Space h="xs" />
       <Slider
         min={0.7}
         max={1.0}
@@ -38,7 +37,6 @@ export const Config = () => {
         onChange={setEyeSize}
         label={(value) => `${value.toFixed(2)}`}
       />
-      <Space h="xs" />
       <Slider
         min={0.6}
         max={1.2}
@@ -56,7 +54,6 @@ export const Config = () => {
         onChange={setMouthSize}
         label={(value) => `${value.toFixed(2)}`}
       />
-      <Space h="xs" />
       <Slider
         min={0.7}
         max={1.3}
