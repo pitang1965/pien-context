@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { ConfigContext } from '@main/App';
+import { ConfigContext } from '@context/config';
 import styles from './Preview.module.css';
 
 //  woeu(white of eye upper): 上の白目

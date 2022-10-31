@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { Slider, Stack } from '@mantine/core';
-import { ConfigContext } from '@main/App';
+import { ConfigContext } from '@context/config';
 
 export const Config = () => {
   const {faceSize, setFaceSize, eyeSize, setEyeSize, mouthSize, setMouthSize, cheekSize, setCheekSize } = useContext(ConfigContext);
