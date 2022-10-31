@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import {
   ColorScheme,
@@ -10,6 +10,43 @@ import { HomePage } from './pages/HomePage';
 import { AboutPage } from './pages/AboutPage';
 import { NotFoundPage } from './pages/NotFoundPage';
 import { useLocalStorage } from '@mantine/hooks';
+
+import { createContext, Dispatch, SetStateAction } from 'react';
+
+export const initialState = {
+  faceSize: 96,
+  eyeSize: 1.0,
+  mouthSize: 1.0,
+  cheekSize: 1.0,
+};
+
+export const ConfigContext = createContext<{
+  faceSize: number;
+  eyeSize: number;
+  mouthSize: number;
+  cheekSize: number;
+  setFaceSize: Dispatch<SetStateAction<number>>;
+  setEyeSize: Dispatch<SetStateAction<number>>;
+  setMouthSize: Dispatch<SetStateAction<number>>;
+  setCheekSize: Dispatch<SetStateAction<number>>;
+}>({
+  faceSize: initialState.faceSize,
+  eyeSize: initialState.eyeSize,
+  mouthSize: initialState.mouthSize,
+  cheekSize: initialState.cheekSize,
+  setFaceSize: () => {
+    throw Error('Not initialized');
+  },
+  setEyeSize: () => {
+    throw Error('Not initialized');
+  },
+  setMouthSize: () => {
+    throw Error('Not initialized');
+  },
+  setCheekSize: () => {
+    throw Error('Not initialized');
+  },
+});
 
 function MyGlobalStyles() {
   return (
@@ -45,25 +82,43 @@ export default function App() {
   const toggleColorSchem = (value?: ColorScheme) =>
     setColorScheme(value || (colorScheme === 'dark' ? 'light' : 'dark'));
 
+  const [faceSize, setFaceSize] = useState<number>(initialState.faceSize);
+  const [eyeSize, setEyeSize] = useState<number>(initialState.eyeSize);
+  const [mouthSize, setMouthSize] = useState<number>(initialState.mouthSize);
+  const [cheekSize, setCheekSize] = useState<number>(initialState.cheekSize);
+
   return (
-    <ColorSchemeProvider
-      colorScheme={colorScheme}
-      toggleColorScheme={toggleColorSchem}
+    <ConfigContext.Provider
+      value={{
+        faceSize,
+        eyeSize,
+        mouthSize: mouthSize,
+        cheekSize,
+        setFaceSize,
+        setEyeSize,
+        setMouthSize: setMouthSize,
+        setCheekSize,
+      }}
     >
-      <MantineProvider
-        withGlobalStyles
-        withNormalizeCSS
-        theme={{ colorScheme }}
+      <ColorSchemeProvider
+        colorScheme={colorScheme}
+        toggleColorScheme={toggleColorSchem}
       >
-        <MyGlobalStyles />
-        <Router>
-          <Routes>
-            <Route path='/about' element={<AboutPage />} />
-            <Route path='/' element={<HomePage />} />
-            <Route path='*' element={<NotFoundPage />} />
-          </Routes>
-        </Router>
-      </MantineProvider>
-    </ColorSchemeProvider>
+        <MantineProvider
+          withGlobalStyles
+          withNormalizeCSS
+          theme={{ colorScheme }}
+        >
+          <MyGlobalStyles />
+          <Router>
+            <Routes>
+              <Route path='/about' element={<AboutPage />} />
+              <Route path='/' element={<HomePage />} />
+              <Route path='*' element={<NotFoundPage />} />
+            </Routes>
+          </Router>
+        </MantineProvider>
+      </ColorSchemeProvider>
+    </ConfigContext.Provider>
   );
 }

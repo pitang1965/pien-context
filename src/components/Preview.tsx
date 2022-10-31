@@ -1,38 +1,33 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { ConfigContext } from '@main/App';
+import styles from './Preview.module.css';
 
-// The expected type comes from property 'style' which is declared here on type 'DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>'
+//  woeu(white of eye upper): 上の白目
+//  woel(white of eye lower): 下の白目
 
 export const Preview = () => {
-  const configContext = {
-    faceSize: 96,
-    eyeSize: 1.0,
-    mouseSize: 1.0,
-    cheekSize: 1.0,
-  };
-  let uiFaceSize;
+  const configContext = useContext(ConfigContext);
 
   // 顔
-  // eslint-disable-next-line prefer-const
-  uiFaceSize = configContext.faceSize;
-  const uiFaceColor = '#FEE99E';
-
+  const faceSize = configContext.faceSize;
+  const faceColor = '#FEE99E';
   const faceStyle = {
-    width: `${uiFaceSize}px`,
-    height: `${uiFaceSize}px`,
+    width: `${faceSize}px`,
+    height: `${faceSize}px`,
     borderRadius: '50%',
-    background: `${uiFaceColor}`,
+    background: `${faceColor}`,
     position: 'relative',
     border: 'solid #333 3px',
   } as const;
 
   // 目
-  const eyeSize = uiFaceSize * configContext.eyeSize * 0.25;
-  const uiEyeToEyeDistancepercent = 40;
+  const eyeSize = faceSize * configContext.eyeSize * 0.25;
+  const eyeToEyeDistancepercent = 40;
 
   const eyeDistanceFromOuter =
-    (uiFaceSize - (uiFaceSize * uiEyeToEyeDistancepercent) / 100 - eyeSize) / 2;
+    (faceSize - (faceSize * eyeToEyeDistancepercent) / 100 - eyeSize) / 2;
   const eyeTopPercent = 45;
-  const eyeTop = (uiFaceSize * eyeTopPercent) / 100 - eyeSize / 2;
+  const eyeTop = (faceSize * eyeTopPercent) / 100 - eyeSize / 2;
 
   const eyeStyleLeft = {
     width: `${eyeSize}px`,
@@ -120,10 +115,10 @@ export const Preview = () => {
   } as const;
 
   // 眉毛
-  const eyeBlowTop = uiFaceSize * 0.18;
-  const eyeBlowWidth = uiFaceSize * 0.15;
-  const eyeBlowHeight = uiFaceSize * 0.15;
-  const eyeBlowDistanceFromOuter = uiFaceSize * 0.12;
+  const eyeBlowTop = faceSize * 0.18;
+  const eyeBlowWidth = faceSize * 0.15;
+  const eyeBlowHeight = faceSize * 0.15;
+  const eyeBlowDistanceFromOuter = faceSize * 0.12;
 
   const eyeBrowStyleLeft = {
     position: 'absolute',
@@ -148,9 +143,9 @@ export const Preview = () => {
   } as const;
 
   // 眉毛っぽくするためのトリミング
-  const eyeBlowAfterTop = uiFaceSize * 0.13;
-  const eyeBlowAfterWidth = uiFaceSize * 0.14;
-  const eyeBlowAfterHeight = uiFaceSize * 0.2;
+  const eyeBlowAfterTop = faceSize * 0.13;
+  const eyeBlowAfterWidth = faceSize * 0.14;
+  const eyeBlowAfterHeight = faceSize * 0.2;
   const eyeBlowAfterDistanceFromOuter = eyeBlowDistanceFromOuter * 0.9;
 
   const eyeBrowAfterStyleLeft = {
@@ -160,7 +155,7 @@ export const Preview = () => {
     height: `${eyeBlowAfterHeight}px`,
     borderRadius: '50%',
     left: `${eyeBlowAfterDistanceFromOuter}px`,
-    background: `${uiFaceColor}`,
+    background: `${faceColor}`,
     transform: 'rotate(60deg)',
   } as const;
 
@@ -171,33 +166,33 @@ export const Preview = () => {
     height: `${eyeBlowAfterHeight}px`,
     borderRadius: '50%',
     right: `${eyeBlowAfterDistanceFromOuter}px`,
-    background: `${uiFaceColor}`,
+    background: `${faceColor}`,
     transform: 'rotate(-60deg)',
   } as const;
 
   // 口
-  const mouseSize = uiFaceSize * configContext.mouseSize * 0.15;
-  const mouseThickness = mouseSize * 0.25;
+  const mouthSize = faceSize * configContext.mouthSize * 0.15;
+  const mouthThickness = mouthSize * 0.25;
   const sin45 = 0.707;
-  const mouseLeft = uiFaceSize / 2 - mouseSize / 2;
-  const mouseBottom = uiFaceSize / 4 - mouseSize * sin45;
+  const mouthLeft = faceSize / 2 - mouthSize / 2;
+  const mouthBottom = faceSize / 4 - mouthSize * sin45;
 
   const mouthStyle = {
     position: 'absolute',
-    bottom: `${mouseBottom}px`,
-    width: `${mouseSize}px`,
-    height: `${mouseSize}px`,
-    borderTop: `${mouseThickness}px solid #ef0853`,
-    borderRight: `${mouseThickness}px solid #ef0853`,
-    left: `${mouseLeft}px`,
+    bottom: `${mouthBottom}px`,
+    width: `${mouthSize}px`,
+    height: `${mouthSize}px`,
+    borderTop: `${mouthThickness}px solid #ef0853`,
+    borderRight: `${mouthThickness}px solid #ef0853`,
+    left: `${mouthLeft}px`,
     transform: 'rotate(-45deg)',
   } as const;
 
   // ほっぺ
-  const cheekSize = uiFaceSize * configContext.cheekSize * 0.15;
+  const cheekSize = faceSize * configContext.cheekSize * 0.15;
   const cheekBackgroundColor = '#e2a1a1';
-  const cheekTop = uiFaceSize * 0.5;
-  const cheekDistanceFromOuter = uiFaceSize * 0.12;
+  const cheekTop = faceSize * 0.5;
+  const cheekDistanceFromOuter = faceSize * 0.12;
   const cheekShadow = cheekSize * 0.3;
 
   const cheekStyleLeft = {
@@ -223,7 +218,7 @@ export const Preview = () => {
   } as const;
 
   return (
-    <div className='preview'>
+    <div className={styles.preview}>
       <div style={faceStyle}>
         <div style={eyeBrowStyleLeft}></div>
         <div style={eyeBrowStyleRight}></div>
