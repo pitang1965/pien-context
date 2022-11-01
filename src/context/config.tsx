@@ -4,6 +4,7 @@ import React, {
   FC,
   ReactNode,
   SetStateAction,
+  useMemo,
   useState,
 } from 'react';
 
@@ -19,15 +20,19 @@ export const ConfigContext = createContext<{
   eyeSize: number;
   mouthSize: number;
   cheekSize: number;
-  setFaceSize: Dispatch<SetStateAction<number>>;
-  setEyeSize: Dispatch<SetStateAction<number>>;
-  setMouthSize: Dispatch<SetStateAction<number>>;
-  setCheekSize: Dispatch<SetStateAction<number>>;
 }>({
   faceSize: initialState.faceSize,
   eyeSize: initialState.eyeSize,
   mouthSize: initialState.mouthSize,
   cheekSize: initialState.cheekSize,
+});
+
+export const ConfigDispatchContext = createContext<{
+  setFaceSize: Dispatch<SetStateAction<number>>;
+  setEyeSize: Dispatch<SetStateAction<number>>;
+  setMouthSize: Dispatch<SetStateAction<number>>;
+  setCheekSize: Dispatch<SetStateAction<number>>;
+}>({
   setFaceSize: () => {
     throw Error('Not initialized');
   },
@@ -48,20 +53,28 @@ export const ConfigProvider: FC<{ children: ReactNode }> = ({ children }) => {
   const [mouthSize, setMouthSize] = useState<number>(initialState.mouthSize);
   const [cheekSize, setCheekSize] = useState<number>(initialState.cheekSize);
 
+  const configDispachValues = useMemo(
+    () => ({
+      setFaceSize,
+      setEyeSize,
+      setMouthSize,
+      setCheekSize,
+    }),
+    [setFaceSize, setEyeSize, setMouthSize, setCheekSize]
+  );
+
   return (
     <ConfigContext.Provider
       value={{
         faceSize,
         eyeSize,
-        mouthSize: mouthSize,
+        mouthSize,
         cheekSize,
-        setFaceSize,
-        setEyeSize,
-        setMouthSize: setMouthSize,
-        setCheekSize,
       }}
     >
-      {children}
+      <ConfigDispatchContext.Provider value={configDispachValues}>
+        {children}
+      </ConfigDispatchContext.Provider>
     </ConfigContext.Provider>
   );
 };

@@ -1,11 +1,11 @@
 import React, { useContext } from 'react';
 import { Slider, Stack } from '@mantine/core';
-import { ConfigContext } from '@context/config';
+import { ConfigDispatchContext, initialState } from '@context/config';
 
 export const Config = () => {
-  const {faceSize, setFaceSize, eyeSize, setEyeSize, mouthSize, setMouthSize, cheekSize, setCheekSize } = useContext(ConfigContext);
-
-  console.log('Config rendered!');
+  const { setFaceSize, setEyeSize, setMouthSize, setCheekSize } = useContext(
+    ConfigDispatchContext
+  );
 
   return (
     <Stack spacing='xl'>
@@ -20,7 +20,7 @@ export const Config = () => {
           { value: 400, label: '400' },
           { value: 500, label: '500' },
         ]}
-        value={faceSize}
+        defaultValue={initialState.faceSize}
         onChange={setFaceSize}
       />
       <Slider
@@ -33,7 +33,7 @@ export const Config = () => {
           { value: 0.9, label: '90%' },
           { value: 1.0, label: '100%' },
         ]}
-        value={eyeSize}
+        defaultValue={initialState.eyeSize}
         onChange={setEyeSize}
         label={(value) => `${value.toFixed(2)}`}
       />
@@ -50,7 +50,7 @@ export const Config = () => {
           { value: 1.1, label: '110%' },
           { value: 1.2, label: '120%' },
         ]}
-        value={mouthSize}
+        defaultValue={initialState.mouthSize}
         onChange={setMouthSize}
         label={(value) => `${value.toFixed(2)}`}
       />
@@ -67,7 +67,7 @@ export const Config = () => {
           { value: 1.2, label: '120%' },
           { value: 1.3, label: '130%' },
         ]}
-        value={cheekSize}
+        defaultValue={initialState.cheekSize}
         onChange={setCheekSize}
         label={(value) => `${value.toFixed(2)}`}
       />
