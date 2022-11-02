@@ -4,6 +4,7 @@ import React, {
   FC,
   ReactNode,
   SetStateAction,
+  useContext,
   useMemo,
   useState,
 } from 'react';
@@ -15,7 +16,7 @@ export const initialState = {
   cheekSize: 1.0,
 };
 
-export const ConfigContext = createContext<{
+const ConfigContext = createContext<{
   faceSize: number;
   eyeSize: number;
   mouthSize: number;
@@ -27,7 +28,7 @@ export const ConfigContext = createContext<{
   cheekSize: initialState.cheekSize,
 });
 
-export const ConfigDispatchContext = createContext<{
+const ConfigDispatchContext = createContext<{
   setFaceSize: Dispatch<SetStateAction<number>>;
   setEyeSize: Dispatch<SetStateAction<number>>;
   setMouthSize: Dispatch<SetStateAction<number>>;
@@ -46,6 +47,10 @@ export const ConfigDispatchContext = createContext<{
     throw Error('Not initialized');
   },
 });
+
+export const useConfig = () => useContext(ConfigContext);
+
+export const useConfigDispatch = () => useContext(ConfigDispatchContext);
 
 export const ConfigProvider: FC<{ children: ReactNode }> = ({ children }) => {
   const [faceSize, setFaceSize] = useState<number>(initialState.faceSize);

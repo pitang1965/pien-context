@@ -1,11 +1,10 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { Slider, Stack } from '@mantine/core';
-import { ConfigDispatchContext, initialState } from '@context/config';
+import { initialState, useConfigDispatch } from '@context/config';
 
 export const Config = () => {
-  const { setFaceSize, setEyeSize, setMouthSize, setCheekSize } = useContext(
-    ConfigDispatchContext
-  );
+  const { setFaceSize, setEyeSize, setMouthSize, setCheekSize } =
+    useConfigDispatch();
 
   return (
     <Stack spacing='xl'>

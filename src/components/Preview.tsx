@@ -1,15 +1,15 @@
-import React, { useContext } from 'react';
-import { ConfigContext } from '@context/config';
+import React from 'react';
+import { useConfig } from '@context/config';
 import styles from './Preview.module.css';
 
 //  woeu(white of eye upper): 上の白目
 //  woel(white of eye lower): 下の白目
 
 export const Preview = () => {
-  const configContext = useContext(ConfigContext);
+  const config = useConfig();
 
   // 顔
-  const faceSize = configContext.faceSize;
+  const faceSize = config.faceSize;
   const faceColor = '#FEE99E';
   const faceStyle = {
     width: `${faceSize}px`,
@@ -21,7 +21,7 @@ export const Preview = () => {
   } as const;
 
   // 目
-  const eyeSize = faceSize * configContext.eyeSize * 0.25;
+  const eyeSize = faceSize * config.eyeSize * 0.25;
   const eyeToEyeDistancepercent = 40;
 
   const eyeDistanceFromOuter =
@@ -171,7 +171,7 @@ export const Preview = () => {
   } as const;
 
   // 口
-  const mouthSize = faceSize * configContext.mouthSize * 0.15;
+  const mouthSize = faceSize * config.mouthSize * 0.15;
   const mouthThickness = mouthSize * 0.25;
   const sin45 = 0.707;
   const mouthLeft = faceSize / 2 - mouthSize / 2;
@@ -189,7 +189,7 @@ export const Preview = () => {
   } as const;
 
   // ほっぺ
-  const cheekSize = faceSize * configContext.cheekSize * 0.15;
+  const cheekSize = faceSize * config.cheekSize * 0.15;
   const cheekBackgroundColor = '#e2a1a1';
   const cheekTop = faceSize * 0.5;
   const cheekDistanceFromOuter = faceSize * 0.12;
