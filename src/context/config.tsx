@@ -58,7 +58,7 @@ export const ConfigProvider: FC<{ children: ReactNode }> = ({ children }) => {
   const [mouthSize, setMouthSize] = useState<number>(initialState.mouthSize);
   const [cheekSize, setCheekSize] = useState<number>(initialState.cheekSize);
 
-  const configDispachValues = useMemo(
+  const configDispatchValues = useMemo(
     () => ({
       setFaceSize,
       setEyeSize,
@@ -77,7 +77,7 @@ export const ConfigProvider: FC<{ children: ReactNode }> = ({ children }) => {
         cheekSize,
       }}
     >
-      <ConfigDispatchContext.Provider value={configDispachValues}>
+      <ConfigDispatchContext.Provider value={configDispatchValues}>
         {children}
       </ConfigDispatchContext.Provider>
     </ConfigContext.Provider>

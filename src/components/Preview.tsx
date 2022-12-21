@@ -22,10 +22,10 @@ export const Preview = () => {
 
   // 目
   const eyeSize = faceSize * config.eyeSize * 0.25;
-  const eyeToEyeDistancepercent = 40;
+  const eyeToEyeDistancePercent = 40;
 
   const eyeDistanceFromOuter =
-    (faceSize - (faceSize * eyeToEyeDistancepercent) / 100 - eyeSize) / 2;
+    (faceSize - (faceSize * eyeToEyeDistancePercent) / 100 - eyeSize) / 2;
   const eyeTopPercent = 45;
   const eyeTop = (faceSize * eyeTopPercent) / 100 - eyeSize / 2;
 
